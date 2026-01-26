@@ -1,7 +1,7 @@
 import React, { useState, useEffect, use } from 'react';
 import './App.css';
-import is from 'oauth2-server/lib/validator/is';
-import { set } from 'mongoose';
+
+
 
 function App() {
   // Initializing the state by checking localStorage and System preferences
@@ -25,6 +25,14 @@ function App() {
   // TOGGLE FUNCTION
   const toggleTheme = () => setIsDark((prev) => !prev);
 
+  // setting up form data for all form fields
+  const [formData, setFormData] = useState({
+    model: '',
+    count: '',
+    ratio: '',
+    prompt: ''
+  });
+
   const examplePrompts = [
   "A magic forest with glowing plants and fairy homes among giant mushrooms",
   "An old steampunk airship floating through golden clouds at sunset",
@@ -42,38 +50,48 @@ function App() {
   "A peaceful bamboo forest with a hidden ancient temple",
   "A giant turtle carrying a village on its back in the ocean",
 ];
-
-  
-  // JS CODE(NEEDS TO BE CONVERTED TO REACT CODE )
-  const promptBtn = document.querySelector('.prompt-btn');
-  const promptInput = document.querySelector('.prompt-input');
-  const promptForm = document.querySelector('.prompt-form');
-  const modelSelect = document.getElementById('model-select');
-  const countSelect = document.getElementById('count-select');
-  const ratioSelect = document.getElementById('ratio-select');
-
-  const handleformSubmit = (e) => {
-    e.preventDefault();
-    const selectedModel = modelSelect.value;
-    const imageCount = parseInt(countSelect.value) || 1;
-    const aspectRatio = ratioSelect.value || '1/1';
-    const promptText = promptInput.value.trim();
-
-    if (!selectedModel || !imageCount || !aspectRatio || !promptText) {
-      alert('Please fill in all fields before submitting.');
-      return;
-    }
-
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value
+    }));
   }
 
-  promptBtn.addEventListener('click', () => {
-    const randomPrompt = examplePrompts[Math.floor(Math.random() * examplePrompts.length)];
-    randomPrompt.value = randomPrompt;
-    randomPrompt.focus();
+  
+const handleformSubmit = (e) => {
+  e.preventDefault();
+  const { model, count, ratio, prompt } = formData;
 
-  })
-promptForm.addEventListener("submit", handleformSubmit);
+  if (!model || !count || !ratio || !prompt) {
+    alert('Please fill in all fields before submitting.');
+    return;
+  }
+  console.log('Form submitted with data:', formData);
 
+  // NEED TO ADD API CALL LOGIC HERE
+};
+
+// Handle random Prompt Button Click
+const handleRandomPrompt = () => {
+  const randomPrompt = examplePrompts[Math.floor(Math.random() * examplePrompts.length)];
+  setFormData((prevData) => ({
+    ...prevData,
+    prompt: randomPrompt
+  }));
+};
+
+
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+// JS code needs to be rewritten as REACT JSX CODE
+
+//createImageCards(model, count, ratio, prompt) {}
 
 
 
@@ -105,16 +123,19 @@ promptForm.addEventListener("submit", handleformSubmit);
 
         {/* Main Content Section */}
         <div className="main-content">
-          <form action="#" className="prompt-form">
+          <form action="#" className="prompt-form" onSubmit={handleformSubmit}>
             {/* Prompt Container */}
             <div className="prompt-container">
-              <textarea
-                className="prompt-input"
-                placeholder="Describe your imagination in detail..."
-                required
-                autoFocus
-              ></textarea>
-              <button type = "button"className="prompt-btn">
+          <textarea
+            className="prompt-input"
+            placeholder="Describe your imagination in detail..."
+            required
+            autoFocus
+            name="prompt"
+            value={formData.prompt}
+            onChange={handleChange}
+          ></textarea>
+          <button type="button" className="prompt-btn" onClick={handleRandomPrompt}>
             <i className="fa-solid fa-dice"></i>
           </button>
             </div>
@@ -122,7 +143,8 @@ promptForm.addEventListener("submit", handleformSubmit);
             {/* Prompt Actions Button */}
             <div className = "prompt-actions">
               <div className = "select-wrapper">
-                <select className = "custom-select" id = "model-select" required>
+                <select className = "custom-select" id = "model-select" name="model" 
+                value = {formData.model} onChange={handleChange} required>
                   <option value = "" selected  disabled>Select Model</option>
                   <option value = "black-forest-labs/FLUX.1-dev">FLUX.1-dev</option>
                   <option value = "black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</option>
@@ -133,7 +155,12 @@ promptForm.addEventListener("submit", handleformSubmit);
               </div>
               {/* Images #  select */}
                 <div className = "select-wrapper">
-                <select className = "custom-select"id = "count-select" required>
+                <select className = "custom-select" 
+                id = "count-select" 
+                name="count" 
+                onChange={handleChange}
+                value = {formData.count}
+                required>
                   <option value = "" selected  disabled>Image Count</option>
                   <option value = "1">1 Image</option>
                   <option value = "2">2 Images</option>
@@ -143,7 +170,9 @@ promptForm.addEventListener("submit", handleformSubmit);
               </div>
               {/* Ratio  select */}
                 <div className = "select-wrapper">
-                <select className = "custom-select" id = "ratio-select" required>
+                <select className = "custom-select" id = "ratio-select" name = "ratio" 
+                value = {formData.ratio}
+                onChange={handleChange} required>
                   <option value = "" selected  disabled>Aspect Ratio</option>
                   <option value = "1/1">Square (1:1)</option>
                   <option value = "16/9">Landscape (16:9)</option>
@@ -154,6 +183,13 @@ promptForm.addEventListener("submit", handleformSubmit);
               <button type="submit" className="generate-btn">
                 <i className="fa-solid fa-wand-sparkles"></i> Generate Images
               </button>
+              {/* Result Gallery Grid */}
+              <div className="gallery-grid">
+                <div className="img-card">
+                  <img src="test.png" alt ="test" className="result-img" />
+                </div>
+                </div>
+
 
 
             </div>
