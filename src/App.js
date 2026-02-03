@@ -183,10 +183,59 @@ const handleRandomPrompt = () => {
               <button type="submit" className="generate-btn">
                 <i className="fa-solid fa-wand-sparkles"></i> Generate Images
               </button>
-              {/* Result Gallery Grid */}
+              {/* Result Gallery Grid 1 */}
               <div className="gallery-grid">
                 <div className="img-card">
                   <img src="test.png" alt ="test" className="result-img" />
+                  <div className = "img-overlay" >
+                    <button className = "img-download-btn" >
+                      <i class = "fa-solid fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+                </div>
+              {/* Result Gallery Grid 2 */}
+              <div className="gallery-grid">
+                <div className="img-card">
+                  <img src="test.png" alt ="test" className="result-img" />
+                  <div className = "img-overlay" >
+                    <button className = "img-download-btn" >
+                      <i class = "fa-solid fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+                </div>
+              {/* Result Gallery Grid 3 */}
+              <div className="gallery-grid">
+                <div className="img-card">
+                  <img src="test.png" alt ="test" className="result-img" />
+                  <div className = "img-overlay" >
+                    <button className = "img-download-btn" >
+                      <i class = "fa-solid fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+                </div>
+              {/* Result Gallery Grid 4 */}
+              <div className="gallery-grid">
+                <div className="img-card">
+                  <img src="test.png" alt ="test" className="result-img" />
+                  <div className = "img-overlay" >
+                    <button className = "img-download-btn" >
+                      <i class = "fa-solid fa-download"></i>
+                    </button>
+                  </div>
+                </div>
+                </div>
+              {/* Result Gallery Grid 5 */}
+              <div className="gallery-grid">
+                <div className="img-card">
+                  <img src="test.png" alt ="test" className="result-img" />
+                  <div className = "img-overlay" >
+                    <button className = "img-download-btn" >
+                      <i class = "fa-solid fa-download"></i>
+                    </button>
+                  </div>
                 </div>
                 </div>
 
