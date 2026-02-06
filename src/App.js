@@ -99,7 +99,7 @@ const handleRandomPrompt = () => {
   // JSX CODE 
   // JSX CODE 
   return (
-    <div className="App">
+    <div className={`App ${!isDark ? 'light-theme' : ''}`}>
       {/* Load Font Awesome globally */}
       <link
         rel="stylesheet"
