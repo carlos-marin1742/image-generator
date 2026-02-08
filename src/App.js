@@ -1,6 +1,6 @@
 import React, { useState, useEffect, use } from 'react';
 import './App.css';
-
+import { InferenceClient } from "@huggingface/inference";
 
 
 function App() {
@@ -50,28 +50,17 @@ function App() {
   "A peaceful bamboo forest with a hidden ancient temple",
   "A giant turtle carrying a village on its back in the ocean",
 ];
+
+
+
+// Generic handler to update state based on the 'name' attribute
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value
     }));
-  }
-
-  
-const handleformSubmit = (e) => {
-  e.preventDefault();
-  const { model, count, ratio, prompt } = formData;
-
-  if (!model || !count || !ratio || !prompt) {
-    alert('Please fill in all fields before submitting.');
-    return;
-  }
-  console.log('Form submitted with data:', formData);
-
-  // NEED TO ADD API CALL LOGIC HERE
-};
-
+  };
 // Handle random Prompt Button Click
 const handleRandomPrompt = () => {
   const randomPrompt = examplePrompts[Math.floor(Math.random() * examplePrompts.length)];
@@ -82,16 +71,36 @@ const handleRandomPrompt = () => {
 };
 
 
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
-// JS code needs to be rewritten as REACT JSX CODE
 
-//createImageCards(model, count, ratio, prompt) {}
+const handleformSubmit = (e) => {
+  e.preventDefault();
+  const { model, count, ratio, prompt } = formData;
+// Basic validation to ensure all fields are filled
+ // if (!model || !count || !ratio || !prompt) {
+   // alert('Please fill in all fields before submitting.');
+   // return;
+  //}
+ if (!model || !count || !prompt) {
+    alert('Please fill in all fields before submitting.');
+    return;
+  }
+  console.log('Form submitted with data:', formData);
+};
+
+//.ENV API KEY ACCESS
+const HF_TOKEN = process.env.HF_TOKEN;
+const client = new InferenceClient(HF_TOKEN);
+
+// 1. Defining the models as simple key-value pairs for easy access and scalability
+const models = {
+  "flux-dev": "black-forest-labs/FLUX.1-dev",
+  "flux-schnell": "black-forest-labs/FLUX.1-schnell",
+  "sdxl": "stabilityai/stable-diffusion-xl-base-1.0",
+  "sd15": "runwayml/stable-diffusion-v1-5",
+  "openjourney": "prompthero/openjourney"
+};
+
+// Image Counts Options
 
 
 
@@ -145,12 +154,12 @@ const handleRandomPrompt = () => {
               <div className = "select-wrapper">
                 <select className = "custom-select" id = "model-select" name="model" 
                 value = {formData.model} onChange={handleChange} required>
-                  <option value = "" selected  disabled>Select Model</option>
-                  <option value = "black-forest-labs/FLUX.1-dev">FLUX.1-dev</option>
-                  <option value = "black-forest-labs/FLUX.1-schnell">FLUX.1-schnell</option>
-                  <option value = "stabilityai/stable-diffusion-xl-base-1.0">Stable Diffusion XL</option>
-                  <option value = 'runwayml/stable-diffusion-v1-5'>Stable Diffusion v1.5</option>
-                  <option value ="prompthero/openjourney">OpenJourney</option>
+                  <option value="" disabled>Select Model</option>
+                  <option value={models["flux-dev"]}>FLUX.1-dev</option>
+                  <option value={models["flux-schnell"]}>FLUX.1-schnell</option>
+                  <option value={models["sdxl"]}>Stable Diffusion XL</option>
+                  <option value={models["sd15"]}>Stable Diffusion v1.5</option>
+                  <option value={models["openjourney"]}>OpenJourney</option>
                 </select>
               </div>
               {/* Images #  select */}
@@ -168,7 +177,8 @@ const handleRandomPrompt = () => {
                   <option value = "4">4 Images</option>
                 </select>
               </div>
-              {/* Ratio  select */}
+               
+              {/* Ratio  select
                 <div className = "select-wrapper">
                 <select className = "custom-select" id = "ratio-select" name = "ratio" 
                 value = {formData.ratio}
@@ -178,7 +188,8 @@ const handleRandomPrompt = () => {
                   <option value = "16/9">Landscape (16:9)</option>
                   <option value = "9/16">Portrait (9:16)</option>
                 </select>
-              </div>
+              </div> */}
+              
               {/* Submit Button */}
               <button type="submit" className="generate-btn">
                 <i className="fa-solid fa-wand-sparkles"></i> Generate Images
@@ -249,6 +260,6 @@ const handleRandomPrompt = () => {
       </div>
     </div>
   );
-}
+};
 
 export default App;
