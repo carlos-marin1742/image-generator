@@ -44,10 +44,17 @@ The app supports multiple state-of-the-art image generation models, including FL
 
 ---
 
-## Usage Examples
+## 🎥 Demo Video
 
-[![Demo of the ai image generator](https://img.youtube.com/vi/Vekcy8hwHZ4/maxresdefault.jpg)](https://www.youtube.com/watch?v=Vekcy8hwHZ4)
+[![Watch the demo](https://img.youtube.com/vi/Vekcy8hwHZ4/0.jpg)](https://youtu.be/Vekcy8hwHZ4)
 
+## demo video option 2
+
+<p align="center">
+  <a href="https://youtu.be/Vekcy8hwHZ4">
+    <img src="https://img.youtube.com/vi/Vekcy8hwHZ4/0.jpg" alt="Demo Video"/>
+  </a>
+</p>
 
 
 Here are a few example prompts to get you started:
