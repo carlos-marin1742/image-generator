@@ -1,70 +1,102 @@
-# Getting Started with Create React App
+# ✨ AI Image Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+AI Image Generator is a React-based web application that lets users generate stunning AI-powered images directly in the browser using natural language prompts. Simply describe what you want to see, choose a model, and the app handles the rest — calling the Hugging Face Inference API to produce up to four unique images in seconds.
 
-In the project directory, you can run:
+The app supports multiple state-of-the-art image generation models, including FLUX.1-dev, FLUX.1-schnell, Stable Diffusion XL, Stable Diffusion v1.5, and OpenJourney. It also features a random prompt generator to spark creativity, a light/dark theme toggle with system preference detection, and a one-click image download button — making it a polished, full-featured tool for anyone who wants to explore AI image generation without any backend setup.
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation & Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+- [Node.js](https://nodejs.org/) (v16 or higher recommended)
+- A [Hugging Face](https://huggingface.co/) account and API token
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Steps
 
-### `npm run build`
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/ai-image-generator.git
+   cd ai-image-generator
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. **Set up your environment variables**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   Create a `.env` file in the root of the project (see [Configuration](#configurationenvironment-variables) below):
+   ```bash
+   touch .env
+   ```
 
-### `npm run eject`
+4. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+   The app will open at `http://localhost:3000`.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Usage Examples
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+> 📹 *Video walkthrough coming soon!*
 
-## Learn More
+Here are a few example prompts to get you started:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- `"A magic forest with glowing plants and fairy homes among giant mushrooms"`
+- `"A cyberpunk city with neon signs and flying cars at night"`
+- `"A dragon sleeping on gold coins in a crystal cave"`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can also click the 🎲 **dice button** next to the prompt field to auto-fill a random example prompt.
 
-### Code Splitting
+**Basic workflow:**
+1. Type (or randomize) a prompt describing your desired image
+2. Select an AI model from the dropdown
+3. Choose how many images to generate (1–4)
+4. Click **Generate Images** and wait for results
+5. Hover over any image and click the download button to save it
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Technologies Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **React** — Frontend UI framework
+- **Hugging Face Inference API** — AI image generation backend (`@huggingface/inference`)
+- **CSS (custom)** — Styling with dark/light theme support
+- **Font Awesome** — Icons
+- **JavaScript (ES2020+)** — Async/await, blob handling, localStorage
 
-### Making a Progressive Web App
+### AI Models Supported
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+| Display Name | Model ID |
+|---|---|
+| FLUX.1-dev | `black-forest-labs/FLUX.1-dev` |
+| FLUX.1-schnell | `black-forest-labs/FLUX.1-schnell` |
+| Stable Diffusion XL | `stabilityai/stable-diffusion-xl-base-1.0` |
+| Stable Diffusion v1.5 | `runwayml/stable-diffusion-v1-5` |
+| OpenJourney | `prompthero/openjourney` |
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Configuration / Environment Variables
 
-### Deployment
+Create a `.env` file in the root directory with the following variable:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```env
+REACT_APP_HF_TOKEN=your_hugging_face_api_token_here
+```
 
-### `npm run build` fails to minify
+| Variable | Required | Description |
+|---|---|---|
+| `REACT_APP_HF_TOKEN` | ✅ Yes | Your Hugging Face API token. Get one at [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens) |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> ⚠️ **Important:** Never commit your `.env` file to version control. Make sure `.env` is listed in your `.gitignore`.
+
+The app will log `"Token Loaded: Yes"` to the console on startup if the token is detected correctly.
