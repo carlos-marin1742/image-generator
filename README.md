@@ -100,3 +100,82 @@ REACT_APP_HF_TOKEN=your_hugging_face_api_token_here
 > ⚠️ **Important:** Never commit your `.env` file to version control. Make sure `.env` is listed in your `.gitignore`.
 
 The app will log `"Token Loaded: Yes"` to the console on startup if the token is detected correctly.
+
+---
+
+## Contributing
+
+Contributions are welcome and appreciated! To keep things organized, please follow these steps:
+
+1. **Fork** the repository and create your branch from `main`:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. **Make your changes** and ensure the app runs without errors:
+   ```bash
+   npm start
+   ```
+
+3. **Commit** your changes with a clear, descriptive message:
+   ```bash
+   git commit -m "feat: add support for custom image dimensions"
+   ```
+
+4. **Push** to your fork and open a **Pull Request** against the `main` branch.
+
+### Guidelines
+
+- Keep pull requests focused — one feature or fix per PR
+- Follow the existing code style and component structure
+- Test your changes across both light and dark themes
+- Do not commit `.env` files or expose API keys
+
+For major changes or new feature ideas, please open an issue first to discuss what you'd like to change.
+
+---
+
+## Roadmap
+
+Planned features and improvements for future versions:
+
+- [ ] Aspect ratio selector (portrait, landscape, square)
+- [ ] Image history with local storage persistence
+- [ ] Side-by-side model comparison view
+- [ ] Copy prompt to clipboard button
+- [ ] Negative prompt support
+- [ ] Progress bar for multi-image generation
+
+---
+
+## FAQs
+
+**Q: Why am I getting a "Failed to generate images" error?**  
+A: Double-check that your `REACT_APP_HF_TOKEN` is set correctly in the `.env` file and that the token has inference permissions on Hugging Face.
+
+**Q: Some models are slower than others — is that normal?**  
+A: Yes. FLUX.1-dev and SDXL are larger models and take longer to generate. FLUX.1-schnell is optimized for speed.
+
+**Q: Can I add more models?**  
+A: Absolutely. Add a new entry to the `models` object in `App.jsx` and a corresponding `<option>` in the model select dropdown.
+
+**Q: Are generated images saved anywhere?**  
+A: Images are held in memory during your session. Use the download button to save any image you want to keep.
+
+---
+
+
+## Author & Credits
+
+**Carlos Marin**  
+Creator and sole developer of AI Image Generator.
+
+- 🐙 GitHub: [@carlos-marin1742](https://github.com/carlos-marin1742)
+- 💼 LinkedIn: [https://www.linkedin.com/in/carlos-marin-90482b13b/](https://www.linkedin.com/in/carlos-marin-90482b13b/)
+- 📧 Email: carlosmarinjr1@gmail.com
+
+> Feel free to reach out if you have questions, ideas, or just want to connect!
+
+---
+
+*Built with ❤️ using React and the Hugging Face Inference API.*
