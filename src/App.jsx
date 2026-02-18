@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { InferenceClient } from "@huggingface/inference";
 
+ // Initialize Hugging Face client
+  const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
+  const client = new InferenceClient(HF_TOKEN);
+
+console.log("Token Loaded:", HF_TOKEN ? "Yes" : "No");
+
 function App() {
   // Initializing the state by checking localStorage and System preferences
   const [isDark, setIsDark] = useState(() => {
@@ -82,8 +88,8 @@ function App() {
   };
 
   // Initialize Hugging Face client
-  const HF_TOKEN = process.env.REACT_APP_HF_TOKEN; // Note: Use REACT_APP_ prefix for Create React App
-  const client = new InferenceClient(HF_TOKEN);
+  // const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
+  // const client = new InferenceClient(HF_TOKEN);
 
   // Form submit handler with image generation
   const handleformSubmit = async (e) => {
