@@ -104,14 +104,16 @@ function App() {
     try {
       const imageCount = parseInt(count);
 
-      // ✅ FIX: Removed duplicate 'blobs' declaration. Using a single sequential loop.
+
       const blobs = [];
+      const sleep = (ms) => new Promise(r => setTimeout(r, ms));
       for (let i = 0; i < imageCount; i++) {
         const blob = await client.textToImage({
           model: model,
           inputs: prompt,
         });
         blobs.push(blob);
+        await sleep(400); // Adding a small delay to avoid overwhelming the API
       }
 
       // Convert blobs to URLs
