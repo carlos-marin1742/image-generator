@@ -46,7 +46,7 @@ The app supports multiple state-of-the-art image generation models, including FL
 
 ## Usage Examples
 
-[Video Example](./video.mov)
+[![Video Example](./video.mov)](./video.mov)
 
 Here are a few example prompts to get you started:
 
