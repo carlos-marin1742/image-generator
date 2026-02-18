@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import { InferenceClient } from "@huggingface/inference";
 
- // Initialize Hugging Face client
-  const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
-  const client = new InferenceClient(HF_TOKEN);
+// Initialize Hugging Face client
+const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
+const client = new InferenceClient(HF_TOKEN);
 
 console.log("Token Loaded:", HF_TOKEN ? "Yes" : "No");
 
@@ -87,10 +87,6 @@ function App() {
     "openjourney": "prompthero/openjourney"
   };
 
-  // Initialize Hugging Face client
-  // const HF_TOKEN = process.env.REACT_APP_HF_TOKEN;
-  // const client = new InferenceClient(HF_TOKEN);
-
   // Form submit handler with image generation
   const handleformSubmit = async (e) => {
     e.preventDefault();
@@ -107,21 +103,17 @@ function App() {
 
     try {
       const imageCount = parseInt(count);
-      const imagePromises = [];
 
-      // Generate multiple images based on count
+      // ✅ FIX: Removed duplicate 'blobs' declaration. Using a single sequential loop.
+      const blobs = [];
       for (let i = 0; i < imageCount; i++) {
-        imagePromises.push(
-          client.textToImage({
-            model: model,
-            inputs: prompt,
-          })
-        );
+        const blob = await client.textToImage({
+          model: model,
+          inputs: prompt,
+        });
+        blobs.push(blob);
       }
 
-      // Wait for all images to be generated
-      const blobs = await Promise.all(imagePromises);
-      
       // Convert blobs to URLs
       const imageUrls = blobs.map(blob => URL.createObjectURL(blob));
       setGeneratedImages(imageUrls);
@@ -144,15 +136,9 @@ function App() {
     document.body.removeChild(link);
   };
 
-  // JSX CODE 
+  // JSX CODE
   return (
     <div className={`App ${!isDark ? 'light-theme' : ''}`}>
-      {/* Load Font Awesome globally */}
-      <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      />
-
       <div className="container">
         {/* Header Section */}
         <header className="header">
@@ -190,12 +176,12 @@ function App() {
             {/* Prompt Actions Button */}
             <div className="prompt-actions">
               <div className="select-wrapper">
-                <select 
-                  className="custom-select" 
-                  id="model-select" 
-                  name="model" 
-                  value={formData.model} 
-                  onChange={handleChange} 
+                <select
+                  className="custom-select"
+                  id="model-select"
+                  name="model"
+                  value={formData.model}
+                  onChange={handleChange}
                   required
                 >
                   <option value="" disabled>Select Model</option>
@@ -209,10 +195,10 @@ function App() {
 
               {/* Images # select */}
               <div className="select-wrapper">
-                <select 
-                  className="custom-select" 
-                  id="count-select" 
-                  name="count" 
+                <select
+                  className="custom-select"
+                  id="count-select"
+                  name="count"
                   onChange={handleChange}
                   value={formData.count}
                   required
@@ -224,10 +210,10 @@ function App() {
                   <option value="4">4 Images</option>
                 </select>
               </div>
-              
+
               {/* Submit Button */}
               <button type="submit" className="generate-btn" disabled={loading}>
-                <i className="fa-solid fa-wand-sparkles"></i> 
+                <i className="fa-solid fa-wand-sparkles"></i>
                 {loading ? 'Generating...' : 'Generate Images'}
               </button>
             </div>
@@ -248,8 +234,8 @@ function App() {
                   <div className="img-card">
                     <img src={imageUrl} alt={`Generated ${index + 1}`} className="result-img" />
                     <div className="img-overlay">
-                      <button 
-                        className="img-download-btn" 
+                      <button
+                        className="img-download-btn"
                         onClick={() => handleDownload(imageUrl, index)}
                       >
                         <i className="fa-solid fa-download"></i>
