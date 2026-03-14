@@ -8,6 +8,12 @@ The app supports multiple state-of-the-art image generation models, including FL
 
 ---
 
+## 🚀 Live Demo
+
+**[https://image-generator-w439.onrender.com](https://image-generator-w439.onrender.com)**
+
+---
+
 ## Installation & Getting Started
 
 ### Prerequisites
@@ -165,7 +171,6 @@ A: Absolutely. Add a new entry to the `models` object in `App.jsx` and a corresp
 A: Images are held in memory during your session. Use the download button to save any image you want to keep.
 
 ---
-
 
 ## Author & Credits
 
